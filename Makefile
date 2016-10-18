@@ -1,5 +1,13 @@
 TARGET=swiftecho
 
+clean_linux:
+	docker run \
+               --rm \
+               --volume "$(shell pwd)/:/src" \
+               --workdir /src \
+               ibmcom/kitura-ubuntu \
+               swift build -v --build-path ./.build_linux  --clean
+
 build_linux:
 	mkdir -p .build_linux
 	docker run \
@@ -9,22 +17,6 @@ build_linux:
                ibmcom/kitura-ubuntu \
                swift build -v --build-path ./.build_linux
 
-clean_linux:
-	docker run \
-               --rm \
-               --volume "$(shell pwd)/:/src" \
-               --workdir /src \
-               ibmcom/kitura-ubuntu \
-               swift build -v --build-path ./.build_linux  --clean
-
-build_osx:
-	swift build -v
-
-clean_osx:
-	swift build -v --clean
-
-build: build_linux
-
 run_linux: 
 	docker run \
                -it \
@@ -33,4 +25,17 @@ run_linux:
                --workdir /src \
                ibmcom/kitura-ubuntu \
                .build_linux/debug/$(TARGET)
+
+clean_osx:
+	swift build -v --clean
+
+build_osx:
+	swift build -v
+
+run_osx:
+	.build/debug/$(TARGET)
+
+build: build_linux build_osx
+
+clean: clean_linux clean_osx
 
