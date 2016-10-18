@@ -9,13 +9,12 @@ that I want to remember for cross-platform Swift development:
   and Linux, using build directives to conditionally import `Glibc` vs
   `Darwin.C`
 
-- how to setup a Makefile that uses Docker so you can test building
-  and running on macOS and Linux OS, from the comfort of your macOS
-  command line
+- how to setup a Makefile so you can test building and running on
+  macOS and Linux OS, from the comfort of your macOS command line
+  thanks to Docker
 
-- basic interop between Swift and C-oriented system API like `getline`
-
-- how to read a pipe one line at a time, e.g., from standard input
+- basic interop between Swift and C-oriented system API, using
+  `getline` to echo standard input
 
 Things to try:
 
